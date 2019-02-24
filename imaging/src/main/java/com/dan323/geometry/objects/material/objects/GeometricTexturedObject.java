@@ -1,6 +1,6 @@
 package com.dan323.geometry.objects.material.objects;
 
-import com.dan323.geometry.Point;
+import com.dan323.geometry.utils.Point;
 import com.dan323.geometry.objects.GeometricObject;
 import com.dan323.geometry.objects.material.Color;
 

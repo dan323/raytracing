@@ -1,8 +1,8 @@
 package com.dan323.geometry.camera;
 
 
-import com.dan323.geometry.Point;
-import com.dan323.geometry.Vector;
+import com.dan323.geometry.utils.Point;
+import com.dan323.geometry.utils.Vector;
 
 public class Camera {
 	
@@ -11,7 +11,8 @@ public class Camera {
 	private Vector direction;
 	
 	private double distance;
-	private int width,height;
+	private int width;
+	private int height;
 	
 	public Camera(Point or,Vector up,Vector dir,double d) {
 		setOrigin(or);

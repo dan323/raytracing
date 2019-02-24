@@ -1,7 +1,7 @@
 package com.dan323.geometry.objects.material.objects;
 
-import com.dan323.geometry.Point;
-import com.dan323.geometry.Vector;
+import com.dan323.geometry.utils.Point;
+import com.dan323.geometry.utils.Vector;
 import com.dan323.geometry.objects.Plane;
 import com.dan323.geometry.objects.material.Color;
 import com.dan323.geometry.objects.material.Matte;

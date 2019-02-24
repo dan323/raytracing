@@ -2,7 +2,9 @@ package com.dan323.geometry.objects.material;
 
 public class Color {
 	
-	private double r,g,b;
+	private double r;
+	private double g;
+	private double b;
 
 	public Color(double i, double j, double k) {
 		r=i;
@@ -11,13 +13,13 @@ public class Color {
 		scaleToMax1();
 	}
 
-	public static Color WHITE=new Color(1,1,1);
-	public static Color BLACK=new Color(0,0,0);
-	public static Color RED=new Color(1,0,0);
-	public static Color GREEN=new Color(0,1,0);
-	public static Color BLUE=new Color(0,0,1);
-	public static Color YELLOW=new Color(0,1,1);
-	public static Color ORANGE=new Color(1,0.4,0.4);
+	public static final Color WHITE=new Color(1,1,1);
+	public static final Color BLACK=new Color(0,0,0);
+	public static final Color RED=new Color(1,0,0);
+	public static final Color GREEN=new Color(0,1,0);
+	public static final Color BLUE=new Color(0,0,1);
+	public static final Color YELLOW=new Color(0,1,1);
+	public static final Color ORANGE=new Color(1,0.4,0.4);
 
 	public double getR() {
 		return r;

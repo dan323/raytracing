@@ -1,12 +1,12 @@
 package com.dan323.geometry.camera;
 
-import com.dan323.geometry.Point;
-import com.dan323.geometry.Ray;
-import com.dan323.geometry.Vector;
+import com.dan323.geometry.utils.Ray;
 import com.dan323.geometry.light.Ambient;
 import com.dan323.geometry.light.Light;
 import com.dan323.geometry.objects.material.Color;
 import com.dan323.geometry.objects.material.objects.GeometricTexturedObject;
+import com.dan323.geometry.utils.Point;
+import com.dan323.geometry.utils.Vector;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -80,6 +80,8 @@ public class Scene {
         for (Light li : lights) {
             Color aux = geom.getColor(p);
             if (li instanceof Ambient) {
+                //TODO
+                incidence.getX();
             } else {
                 Vector v1 = li.getDirectionToPoint(p, geom);
                 Vector n = geom.getNormalAt(p);

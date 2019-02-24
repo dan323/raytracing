@@ -1,10 +1,16 @@
 package com.dan323.geometry.objects;
 
-import com.dan323.geometry.Ray;
-import com.dan323.geometry.Vector;
-import com.dan323.geometry.Point;
+import com.dan323.geometry.hit.HitInfo;
+import com.dan323.geometry.hit.HitInfoGeometricObject;
+import com.dan323.geometry.hit.PlaneHitInfo;
+import com.dan323.geometry.utils.Ray;
+import com.dan323.geometry.utils.Vector;
+import com.dan323.geometry.utils.Point;
 
-public class Plane implements GeometricObject {
+/**
+ * Class to define the behaviour of a plane
+ */
+public class Plane extends HitInfoGeometricObject {
 	
 	private Point p;
 	private Vector v;
@@ -13,21 +19,13 @@ public class Plane implements GeometricObject {
 		this.p=p;
 		this.v=v.normalize();
 	}
-	
-	@Override
-	public boolean hits(Ray ray) {
-		return ray.getDirection().dot(v)>10E-9;
-	}
-	
-	@Override
-	public double distance(Ray ray) {
-		Vector aux=ray.getOrigin().toPoint(p);
-		double D=aux.dot(v);
-		double E=ray.getDirection().dot(v);
-		return D/E;
+
+	protected void updateHitInfo(Ray ray) {
+		if (HitInfo.checkHitInfoActual(getHitInfo(),ray)) {
+			setHitInfo(new PlaneHitInfo(ray, ray.getOrigin().toPoint(p).dot(v),ray.getDirection().dot(v)));
+		}
 	}
 
-	@Override
 	public Vector getNormalAt(Point p) {
 		return v;
 	}
