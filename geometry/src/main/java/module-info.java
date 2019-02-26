@@ -1,4 +1,4 @@
-module com.geometry{
-    exports com.dan323.geometry.objects;
-    exports com.dan323.geometry.utils;
+module com.dan.geometry{
+    exports com.dan.geometry.objects;
+    exports com.dan.geometry.utils;
 }

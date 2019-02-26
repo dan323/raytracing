@@ -9,9 +9,10 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>light</module>
         <module>geometry</module>
         <module>imaging</module>
-        <module>light</module>
+        <module>jacocoreport</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,6 +20,15 @@
         <jdk.version>1.10</jdk.version>
         <skip.unit.tests>false</skip.unit.tests>
     </properties>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>snapshots-apache</id>
+            <name>Apache SNAPSHOT versions</name>
+            <url>https://repository.apache.org/content/repositories/snapshots</url>
+            <releases><enabled>false</enabled></releases>
+            <snapshots><enabled>true</enabled></snapshots>
+        </pluginRepository>
+    </pluginRepositories>
     <build>
             <plugins>
                 <plugin>
@@ -26,9 +36,34 @@
                     <artifactId>maven-compiler-plugin</artifactId>
                     <version>3.8.0</version>
                     <configuration>
-                        <source>10</source>
-                        <target>10</target>
+                        <source>${jdk.version}</source>
+                        <target>${jdk.version}</target>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>3.1.0-SNAPSHOT</version>
+                    <configuration>
+                        <additionalOptions>
+                            -protected
+                            -html5
+                        </additionalOptions>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                        </execution>
+                        <execution>
+                            <id>aggregate-javadocs</id>
+                            <goals>
+                                <goal>aggregate</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -57,18 +92,20 @@
                     <version>0.8.2</version>
                     <configuration>
                         <append>true</append>
+                        <fileSets>
+                            <fileSet>
+                                <directory>${project.build.directory}</directory>
+                                <includes>
+                                    <include>*.exec</include>
+                                </includes>
+                            </fileSet>
+                        </fileSets>
                     </configuration>
                     <executions>
                         <execution>
                             <id>prepare-agent</id>
                             <goals>
                                 <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>prepare-agent-integration</id>
-                            <goals>
-                                <goal>prepare-agent-integration</goal>
                             </goals>
                         </execution>
                         <execution>
