@@ -20,10 +20,10 @@ public class MatteObjectTest {
     public void matteColor() {
         GeometricTexturedObject sphere = new MatteSphere(ORIGIN, Math.sqrt(3), Color.BLACK);
         Material mat = sphere.getMaterial(POINT_IN_SPHERE);
-        Assertions.assertEquals(mat.getSpecularColor(), Color.BLACK);
-        Assertions.assertEquals(mat.getDiffuseColor(), Color.BLACK);
-        Assertions.assertEquals(mat.getAmbientColor(), Color.BLACK);
-        Assertions.assertEquals(mat.getShininess(), 0);
+        Assertions.assertEquals(Color.BLACK,mat.getSpecularColor());
+        Assertions.assertEquals(Color.BLACK,mat.getDiffuseColor());
+        Assertions.assertEquals(Color.BLACK,mat.getAmbientColor());
+        Assertions.assertEquals(0,mat.getShininess());
         Assertions.assertFalse(mat.isReflexive());
         Assertions.assertFalse(mat.isTransparent());
     }

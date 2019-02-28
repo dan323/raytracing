@@ -1,6 +1,7 @@
 package com.dan.geometry.utils.abstraction;
 
 public abstract class XYZElement {
+    private static final double DELTA = 10E-5;
     private double x;
     private double y;
     private double z;
@@ -34,7 +35,7 @@ public abstract class XYZElement {
     }
 
     private boolean equalsElements(double x, double y, double z){
-        return this.x==x && this.y==y && this.z==z;
+        return Math.abs(this.x-x)<DELTA && Math.abs(this.y-y)<DELTA && Math.abs(this.z-z)<DELTA;
     }
 
     @Override

@@ -11,6 +11,8 @@ public class ColorTest {
         assertColor(new Color(4,1,0));
         assertColor(new Color(4,1,7));
         assertColor(new Color(-1,5,0));
+        assertColor(new Color(-1,-5,0));
+        assertColor(new Color(-1,5,-3));
     }
 
     private void assertColor(Color c) {
@@ -30,4 +32,15 @@ public class ColorTest {
         Assertions.assertEquals(Color.RED,new Color(1,0,0));
         Assertions.assertEquals(Color.GREEN,new Color(0,1,0));
     }
+
+    @Test
+    public void addColors(){
+        Assertions.assertEquals(new Color(0.6,0.1,0.8),new Color(0.1,0.1,0.1).add(new Color(0.5,0,0.7)));
+    }
+
+    @Test
+    public void scaleColors(){
+        Assertions.assertEquals(new Color(0.6,0.1,0.8),new Color(0.1,0.1,0.1).add(new Color(0.5,0,0.7)));
+    }
+
 }

@@ -36,31 +36,21 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <configuration>
-                    <fileSets>
-                        <fileSet>
-                            <directory>${project.build.directory}</directory>
-                            <includes>
-                                <include>*.exec</include>
-                            </includes>
-                        </fileSet>
-                    </fileSets>
-                </configuration>
                 <executions>
                     <execution>
                         <id>report-aggregate</id>
-                        <phase>verify</phase>
+                        <phase>install</phase>
                         <goals>
                             <goal>report-aggregate</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>report-merge</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>merge</goal>
                         </goals>
                     </execution>
                 </executions>

@@ -9,6 +9,7 @@ public class Color {
     public static final Color BLUE = new Color(0, 0, 1);
     public static final Color YELLOW = new Color(0, 1, 1);
     public static final Color ORANGE = new Color(1, 0.4, 0.4);
+    private static final double DELTA = 10E-5;
     private double r;
     private double g;
     private double b;
@@ -41,7 +42,7 @@ public class Color {
     }
 
     private boolean checkRGB(Color ob) {
-        return ob.r == r && ob.g == g && ob.b == b;
+        return Math.abs(ob.r - r)<DELTA && Math.abs(ob.g - g)<DELTA && Math.abs(ob.b - b)<DELTA;
     }
 
     public int toInteger() {
