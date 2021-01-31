@@ -2,14 +2,12 @@ package com.dan.geometry.camera.test;
 
 import com.dan.geometry.camera.Camera;
 import com.dan.geometry.camera.Scene;
-import com.dan.geometry.camera.utils.PhongModelComputations;
 import com.dan.geometry.phong.light.Light;
 import com.dan.geometry.phong.light.ParallelLight;
 import com.dan.geometry.phong.material.Color;
 import com.dan.geometry.phong.texture.GeometricTexturedObject;
 import com.dan.geometry.phong.texture.MatteSphere;
 import com.dan.geometry.utils.Point;
-import com.dan.geometry.utils.Ray;
 import com.dan.geometry.utils.Vector;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,7 +17,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.Collections;
 import java.util.Set;
 
 public class SceneTest {
@@ -31,7 +28,7 @@ public class SceneTest {
         camera.setWidth(800);
         Scene testScene = new Scene(camera);
 
-        System.out.println(camera.getFOVH()*180/3.1415 + ":" + camera.getFOVV()*180/3.1415);
+        System.out.println(camera.getFOVH() * 180 / 3.1415 + ":" + camera.getFOVV() * 180 / 3.1415);
 
         GeometricTexturedObject greenSphere = new MatteSphere(new Point(0, 0, 0), 150, Color.GREEN);
         //testScene.addElement(greenSphere);
@@ -49,12 +46,6 @@ public class SceneTest {
         writeImageFromMatrix(colors);
 
         // TEST
-
-        Ray ray = new Ray(camera.getOrigin(), camera.getDirection());
-        var opt = blueSphere.getHitPoint(ray);
-        opt.ifPresent(System.out::println);
-        var optCol = opt.map(p -> PhongModelComputations.computeColor(1, 1, blueSphere, p, ray.getDirection(), Collections.emptySet(), Collections.singleton(parallelLight)));
-        optCol.ifPresent(color -> Assertions.assertEquals(color, colors[300][300]));
 
         Assertions.assertEquals(camera, testScene.getCamera());
 
