@@ -15,10 +15,16 @@
         <module>jacocoreport</module>
     </modules>
     <properties>
+        <maven.surefire.version>3.0.0-M4</maven.surefire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <jdk.version>1.10</jdk.version>
+        <jdk.version>13</jdk.version>
         <skip.unit.tests>false</skip.unit.tests>
+        <pitest.version>1.4.11</pitest.version>
+        <pitest.junit5.version>0.12</pitest.junit5.version>
+        <maven.jacoco.version>0.8.6</maven.jacoco.version>
+        <junit5.version>5.6.0</junit5.version>
+        <maven.sonar.version>3.8.0.2131</maven.sonar.version>
     </properties>
     <pluginRepositories>
         <pluginRepository>
@@ -34,7 +40,51 @@
         </pluginRepository>
     </pluginRepositories>
     <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.pitest</groupId>
+                    <artifactId>pitest-maven</artifactId>
+                    <version>${pitest.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.pitest</groupId>
+                            <artifactId>pitest-junit5-plugin</artifactId>
+                            <version>${pitest.junit5.version}</version>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>org.pitest</groupId>
+                <artifactId>pitest-maven</artifactId>
+                <configuration>
+                    <verbose>false</verbose>
+                    <targetClasses>
+                        <targetClass>com.dan.*</targetClass>
+                    </targetClasses>
+                    <exportLineCoverage>true</exportLineCoverage>
+                    <outputFormats>
+                        <format>XML</format>
+                        <format>HTML</format>
+                    </outputFormats>
+                    <excludedMethods>
+                        <excludedMethod>hashCode</excludedMethod>
+                    </excludedMethods>
+                    <timestampedReports>false</timestampedReports>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>pit-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>mutationCoverage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -44,10 +94,10 @@
                     <target>${jdk.version}</target>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0</version>
                 <configuration>
                     <additionalOptions>
                         -protected
@@ -69,19 +119,16 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M3</version>
-                <configuration>
-                    <testFailureIgnore>true</testFailureIgnore>
-                </configuration>
+                <version>${maven.surefire.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
-                <version>3.2</version>
+                <version>${maven.sonar.version}</version>
                 <executions>
                     <execution>
                         <phase>verify</phase>
@@ -94,18 +141,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.2</version>
-                <configuration>
-                    <append>true</append>
-                    <fileSets>
-                        <fileSet>
-                            <directory>${project.build.directory}</directory>
-                            <includes>
-                                <include>*.exec</include>
-                            </includes>
-                        </fileSet>
-                    </fileSets>
-                </configuration>
+                <version>${maven.jacoco.version}</version>
                 <executions>
                     <execution>
                         <id>prepare-agent</id>
@@ -123,15 +159,13 @@
                 </executions>
             </plugin>
         </plugins>
-
     </build>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.4.0</version>
+            <version>${junit5.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

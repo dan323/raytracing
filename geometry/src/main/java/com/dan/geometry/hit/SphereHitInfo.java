@@ -2,6 +2,8 @@ package com.dan.geometry.hit;
 
 import com.dan.geometry.utils.Ray;
 
+import static java.lang.Math.sqrt;
+
 /**
  * Implementation of the helper class for hit calculations for the sphere
  */
@@ -21,8 +23,13 @@ public class SphereHitInfo extends HitInfo {
 
     private void setValues(double b, double c) {
         this.radical = b * b - 4 * c;
-        double min = (-b - Math.sqrt(radical))/2;
-        this.distance = min > 0 ? min : (-b + Math.sqrt(radical))/2;
+        if (radical < 0){
+            this.radical = -1;
+            this.distance = -1;
+        } else {
+            double min = (-b - sqrt(radical)) / 2;
+            this.distance = min > 0 ? min : (-b + sqrt(radical)) / 2;
+        }
     }
 
     public boolean isHit() {

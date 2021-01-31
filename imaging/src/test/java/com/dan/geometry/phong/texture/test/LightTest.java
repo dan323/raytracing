@@ -19,22 +19,22 @@ public class LightTest {
 
     @Test
     public void lightPointTest() {
-        PointLight pointLight = new PointLight(ORIGIN, Color.RED);
-        Vector vec = pointLight.getDirectionToPoint(POINT_IN_SPHERE, SPHERE);
-        Assertions.assertEquals(vector.normalize(), vec);
+        PointLight pointLight = new PointLight(ORIGIN, Color.RED, 3);
+        Vector vec = pointLight.getDirectionFromPoint(POINT_IN_SPHERE, SPHERE);
+        Assertions.assertEquals(vector.normalize().scale(-1), vec);
     }
 
     @Test
     public void lightParallelTest() {
-        ParallelLight parallelLight = new ParallelLight(Color.ORANGE, vector);
-        Vector vec = parallelLight.getDirectionToPoint(POINT_IN_SPHERE, SPHERE);
-        Assertions.assertEquals(vector.normalize(),vec);
+        ParallelLight parallelLight = new ParallelLight(Color.ORANGE, vector, 3);
+        Vector vec = parallelLight.getDirectionFromPoint(POINT_IN_SPHERE, SPHERE);
+        Assertions.assertEquals(vector.normalize().scale(-1),vec);
     }
 
     @Test
     public void ambientTest() {
-        Ambient ambient = new Ambient(Color.BLUE);
-        Vector vec = ambient.getDirectionToPoint(POINT_IN_SPHERE, SPHERE);
+        Ambient ambient = new Ambient(Color.BLUE, 3);
+        Vector vec = ambient.getDirectionFromPoint(POINT_IN_SPHERE, SPHERE);
         Assertions.assertEquals(vector.normalize(),vec);
     }
 

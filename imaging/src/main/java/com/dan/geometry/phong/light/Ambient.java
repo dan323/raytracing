@@ -8,12 +8,13 @@ import com.dan.geometry.objects.GeometricObject;
 
 public class Ambient extends Light {
 	
-	public Ambient(Color intensity) {
+	public Ambient(Color intensity,double watt) {
 		setIntensity(intensity);
+		setWatt(watt);
 	}
 
 	@Override
-	public Vector getDirectionToPoint(Point p, GeometricObject ob) {
+	public Vector getDirectionFromPoint(Point p, GeometricObject ob) {
 		return ob.getNormalAt(p);
 	}
 

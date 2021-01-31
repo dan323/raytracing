@@ -2,11 +2,10 @@ package com.dan.geometry.utils;
 
 public class Ray {
 
-    private Point origin;
-    private Vector direction;
+    private final Point origin;
+    private final Vector direction;
 
     public Ray(Point origin, Vector direction) {
-        super();
         this.origin = origin;
         this.direction = direction.normalize();
     }

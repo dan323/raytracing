@@ -2,6 +2,8 @@ package com.dan.geometry.hit;
 
 import com.dan.geometry.utils.Ray;
 
+import static java.lang.Math.abs;
+
 public class PlaneHitInfo extends HitInfo {
 
     private boolean isParallelNot;
@@ -11,19 +13,19 @@ public class PlaneHitInfo extends HitInfo {
         super(ray);
     }
 
-    public PlaneHitInfo(Ray ray,double d,double e){
+    public PlaneHitInfo(Ray ray, double d, double e) {
         this(ray);
-        setValues(d,e);
+        setValues(d, e);
     }
 
     @Override
     public boolean isHit() {
-        return isParallelNot && distance>=0;
+        return isParallelNot && distance >= 0;
     }
 
-    private void setValues(double d,double e){
-        this.distance=d/e;
-        this.isParallelNot =(Math.abs(e)>10E-9);
+    private void setValues(double d, double e) {
+        this.distance = d / e;
+        this.isParallelNot = (abs(e) > 10E-9);
     }
 
     @Override

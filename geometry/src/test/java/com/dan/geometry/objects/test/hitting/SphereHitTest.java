@@ -26,32 +26,32 @@ public class SphereHitTest extends ObjectHitDistanceTest {
     }
 
     @Test
-    public void wrongDirectionRay(){
-        Ray ray=new Ray(new Point(2,1,10),new Vector(0,0,1));
+    public void wrongDirectionRay() {
+        Ray ray = new Ray(new Point(2, 1, 10), new Vector(0, 0, 1));
         Assertions.assertFalse(getObject().hits(ray));
     }
 
     @Test
-    public void notHittingRay(){
-        Ray ray=new Ray(new Point(-10,-10,0),new Vector(-1,0,0));
+    public void notHittingRay() {
+        Ray ray = new Ray(new Point(-10, -10, 0), new Vector(-1, 0, 0));
         Assertions.assertFalse(getObject().hits(ray));
     }
 
     @Test
-    public void insideSphere(){
-        Ray ray=new Ray(new Point(2,1,3),new Vector(1,0,0));
+    public void insideSphere() {
+        Ray ray = new Ray(new Point(2, 1, 3), new Vector(1, 0, 0));
         Assertions.assertTrue(getObject().hits(ray));
     }
 
     @Test
-    public void twoHitSphere(){
-        Point p=new Point(-100,1,3);
-        Ray ray=new Ray(p, PointUtils.toPoint(p,origin));
+    public void twoHitSphere() {
+        Point p = new Point(-100, 1, 3);
+        Ray ray = new Ray(p, PointUtils.toPoint(p, origin));
         Assertions.assertTrue(getObject().hits(ray));
     }
 
     @Override
     protected boolean isInObject(Point hit) {
-        return Math.abs(PointUtils.distance(origin,hit) - radious) < 10E-5;
+        return Math.abs(PointUtils.distance(origin, hit) - radious) < 10E-5;
     }
 }

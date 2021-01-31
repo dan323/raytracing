@@ -1,6 +1,10 @@
 package com.dan.geometry.utils.abstraction;
 
+/**
+ * Abstract class for a (x,y,z) tuple
+ */
 public abstract class XYZElement {
+
     private static final double DELTA = 10E-5;
     private double x;
     private double y;
@@ -29,6 +33,11 @@ public abstract class XYZElement {
         return "{" + x + "," + y + "," + z + "}";
     }
 
+    /**
+     * Check of equality considering rounding errors
+     * @param ob object to compare with
+     * @return true if the object is an {@link XYZElement} with each component near the value of each component of the current object
+     */
     @Override
     public boolean equals(Object ob){
         return (ob instanceof XYZElement) && ((XYZElement)ob).equalsElements(x,y,z);

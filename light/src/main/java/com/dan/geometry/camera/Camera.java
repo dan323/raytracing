@@ -14,14 +14,27 @@ public class Camera {
     private int width;
     private int height;
 
-    public Camera(Point or, Vector up, Vector dir, double d) {
-        setOrigin(or);
-        setDirection(dir.normalize());
-        Vector aux = getDirection();
-        aux = aux.scale(-VectorUtils.dot(up,dir));
-        aux = VectorUtils.add(aux,up);
-        setUp(aux.normalize());
-        setDistance(d);
+    public Camera(Point origin, Vector up, Vector direction, double distance) {
+        this.origin = origin;
+        this.direction = direction.normalize();
+        this.up = VectorUtils.add(direction.scale(-VectorUtils.dot(up, direction)), up).normalize();
+        this.distance = distance;
+    }
+
+    public double getFOVV() {
+        if (height > 0) {
+            return 2 * Math.atan2(height / 2.0, distance);
+        } else {
+            return 0;
+        }
+    }
+
+    public double getFOVH() {
+        if (width > 0) {
+            return 2 * Math.atan2(width / 2.0, distance);
+        } else {
+            return 0;
+        }
     }
 
     public Point getOrigin() {
@@ -37,7 +50,7 @@ public class Camera {
     }
 
     public void setUp(Vector up) {
-        this.up = up;
+        this.up = VectorUtils.add(getDirection().scale(-VectorUtils.dot(up, direction)), up).normalize();
     }
 
     public Vector getDirection() {
@@ -45,7 +58,7 @@ public class Camera {
     }
 
     public void setDirection(Vector direction) {
-        this.direction = direction;
+        this.direction = direction.normalize();
     }
 
     public double getDistance() {
@@ -71,6 +84,5 @@ public class Camera {
     public void setWidth(int width) {
         this.width = width;
     }
-
 
 }

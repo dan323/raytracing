@@ -7,21 +7,22 @@ import com.dan.geometry.utils.Ray;
  */
 public abstract class HitInfo {
 
-    private Ray hittingRay;
+    private final Ray hittingRay;
 
-    protected HitInfo(Ray ray){
-        hittingRay=ray;
+    protected HitInfo(Ray ray) {
+        hittingRay = ray;
     }
 
-    private Ray getHittingRay(){
+    private Ray getHittingRay() {
         return hittingRay;
     }
 
-    public static boolean checkHitInfoActual(HitInfo hitInfo, Ray ray){
-        return hitInfo==null || hitInfo.getHittingRay() == null || !hitInfo.getHittingRay().equals(ray);
+    public static boolean checkHitInfoActual(HitInfo hitInfo, Ray ray) {
+        return hitInfo == null || hitInfo.getHittingRay() == null || !hitInfo.getHittingRay().equals(ray);
     }
 
     public abstract boolean isHit();
+
     public abstract double getDistance();
 
 }

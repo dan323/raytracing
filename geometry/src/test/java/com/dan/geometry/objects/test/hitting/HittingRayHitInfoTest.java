@@ -7,16 +7,20 @@ import com.dan.geometry.utils.Vector;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static com.dan.geometry.hit.HitInfo.checkHitInfoActual;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class HittingRayHitInfoTest {
 
     @Test
-    public void hittingRayNull(){
-        Assertions.assertTrue(HitInfo.checkHitInfoActual(null,null));
+    public void hittingRayNull() {
+        assertTrue(checkHitInfoActual(null, null));
     }
 
     @Test
     public void hittingRayHitInfoTest() {
-        HitInfo hitInfo=new HitInfo(null) {
+        HitInfo hitInfo = new HitInfo(null) {
             @Override
             public boolean isHit() {
                 return false;
@@ -28,11 +32,11 @@ public class HittingRayHitInfoTest {
             }
         };
 
-        Assertions.assertTrue(HitInfo.checkHitInfoActual(hitInfo,null));
+        assertTrue(checkHitInfoActual(hitInfo, null));
 
-        Ray ray=new Ray(new Point(1,1,1),new Vector(1,1,1));
-        Ray ray2=new Ray(new Point(1,1,1),new Vector(1,2,1));
-        hitInfo=new HitInfo(ray) {
+        Ray ray = new Ray(new Point(1, 1, 1), new Vector(1, 1, 1));
+        Ray ray2 = new Ray(new Point(1, 1, 1), new Vector(1, 2, 1));
+        hitInfo = new HitInfo(ray) {
             @Override
             public boolean isHit() {
                 return false;
@@ -44,8 +48,8 @@ public class HittingRayHitInfoTest {
             }
         };
 
-        Assertions.assertFalse(HitInfo.checkHitInfoActual(hitInfo,ray));
-        Assertions.assertTrue(HitInfo.checkHitInfoActual(hitInfo,ray2));
+        assertFalse(checkHitInfoActual(hitInfo, ray));
+        assertTrue(checkHitInfoActual(hitInfo, ray2));
     }
 
 }

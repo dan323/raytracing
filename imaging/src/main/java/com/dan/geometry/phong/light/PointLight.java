@@ -10,14 +10,15 @@ public class PointLight extends Light {
 	
 	private Point point;
 	
-	public PointLight(Point p, Color inte) {
+	public PointLight(Point p, Color inte,double watt) {
 		point=p;
 		setIntensity(inte);
+		setWatt(watt);
 	}
 
 	@Override
-	public Vector getDirectionToPoint(Point p, GeometricObject ob) {
-		Vector sol= PointUtils.toPoint(point, p);
+	public Vector getDirectionFromPoint(Point p, GeometricObject ob) {
+		Vector sol= PointUtils.toPoint(p, point);
 		return sol.normalize();
 	}
 
